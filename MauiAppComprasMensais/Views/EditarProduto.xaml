@@ -11,20 +11,37 @@
     <ScrollView>
         <VerticalStackLayout Spacing="15" Padding="30" BackgroundColor="Beige">
             <Frame BorderColor="#B0C4DE" Padding="30" BackgroundColor="Beige">
-                <Label Text="Editar Produto" FontSize="22" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#2C3E50"/>
+                <Label Text="Editar Produto"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="#2C3E50"/>
             </Frame>
 
             <Label Text="Descrição do Produto:" FontAttributes="Bold"/>
-            <Entry x:Name="txt_descricao" Text="{Binding Descricao}" />
+            <Entry x:Name="txt_descricao"
+                   Text="{Binding Descricao, Mode=TwoWay}" />
 
             <Label Text="Quantidade:" FontAttributes="Bold"/>
-            <Entry x:Name="txt_quantidade" Text="{Binding Quantidade}" Keyboard="Numeric"/>
+            <Entry x:Name="txt_quantidade"
+                   Text="{Binding Quantidade, Mode=TwoWay}"
+                   Keyboard="Numeric"/>
 
             <Label Text="Preço Unitário:" FontAttributes="Bold"/>
-            <Entry x:Name="txt_preco" Text="{Binding Preco}" Keyboard="Numeric"/>
+            <Entry x:Name="txt_preco"
+                   Text="{Binding Preco, Mode=TwoWay}"
+                   Keyboard="Numeric"/>
 
             <Label Text="Data da Compra:" FontAttributes="Bold"/>
-            <DatePicker x:Name="dt_dataCompra" Date="{Binding DataCadastro}" />
+            <!-- Binding TwoWay para atualizar o objeto -->
+            <DatePicker x:Name="dt_dataCompra"
+                        Date="{Binding DataCadastro, Mode=TwoWay}" />
+
+            <!-- Exibição formatada da data no padrão brasileiro -->
+            <Label Text="{Binding DataCadastro, StringFormat='{0:dd/MM/yyyy}'}"
+                   FontAttributes="Italic"
+                   TextColor="Gray"
+                   HorizontalOptions="Center"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

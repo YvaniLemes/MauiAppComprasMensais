@@ -5,9 +5,11 @@ namespace MauiAppComprasMensais.Views
 {
     public partial class EditarProduto : ContentPage
     {
+        private Produto _produto;
         public EditarProduto(Produto produto)
         {
             InitializeComponent();
+            _produto = produto ?? throw new ArgumentNullException(nameof(produto));
             BindingContext = produto; // recebe o mesmo objeto da lista
         }
 

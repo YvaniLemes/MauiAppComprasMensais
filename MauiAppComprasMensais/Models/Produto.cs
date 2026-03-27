@@ -5,10 +5,11 @@ namespace MauiAppComprasMensais.Models
 {
     public class Produto : INotifyPropertyChanged
     {
-        string _descricao;
-        double _quantidade;
-        double _preco;
-        DateTime _dataCadastro = DateTime.Now;
+        // Inicializações para evitar CS8618
+        private string _descricao = string.Empty;
+        private double _quantidade = 0;
+        private double _preco = 0;
+        private DateTime _dataCadastro = DateTime.Now;
 
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -70,8 +71,11 @@ namespace MauiAppComprasMensais.Models
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        // Evento ajustado para ser anulável (evita CS8612/CS8618)
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         protected void OnPropertyChanged(string propertyName) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
+
