@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiAppComprasMensais.Views.EditarProduto"
@@ -10,30 +11,29 @@
     </ContentPage.ToolbarItems>
 
     <ScrollView>
-        <VerticalStackLayout Spacing="15"  Padding="30" 
-                          BackgroundColor="LavenderBlush" >
-            <Frame BorderColor="Black" Padding="30" BackgroundColor="Coral">
-                <Label Text="Editar Produto" FontSize="22" FontAttributes="Bold" HorizontalOptions="Center" />
+        <VerticalStackLayout Spacing="15" Padding="30" BackgroundColor="Black">
+            <Frame BorderColor="#B0C4DE" Padding="30" BackgroundColor="Black">
+                <Label Text="Editar Produto" FontSize="22" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#2C3E50"/>
             </Frame>
 
-            <Label Text="Descrição do Produto:" BackgroundColor="Bisque" FontAttributes="Bold"/>
+            <Label Text="Descrição do Produto:" BackgroundColor="Black" FontAttributes="Bold" TextColor="#3C3C3C"/>
             <Entry x:Name="txt_descricao" Text="{Binding Descricao}"
-                FontFamily="Playfair"
-                TextColor="DarkBlue"
-                BackgroundColor="Bisque"/>
+           FontFamily="Playfair"
+           TextColor="#2C3E50"
+           BackgroundColor="Black"/>
 
-            <Label Text="Quantidade: " BackgroundColor="Bisque" FontAttributes="Bold"/>
-            <Entry x:Name="txt_quantidade" Text="{Binding Quantidade}" Keyboard="Numeric" 
-            FontFamily="Playfair"
-            TextColor="DarkBlue"
-            BackgroundColor="Bisque"/>
+            <Label Text="Quantidade:" BackgroundColor="Black" FontAttributes="Bold" TextColor="#3C3C3C"/>
+            <Entry x:Name="txt_quantidade" Text="{Binding Quantidade}" Keyboard="Numeric"
+           FontFamily="Playfair"
+           TextColor="#2C3E50"
+           BackgroundColor="Black"/>
 
-            <Label Text="Preço Unitário: " BackgroundColor="Bisque" FontAttributes="Bold"/>
+            <Label Text="Preço Unitário:" BackgroundColor="Black" FontAttributes="Bold" TextColor="#3C3C3C"/>
             <Entry x:Name="txt_preco" Text="{Binding Preco}" Keyboard="Numeric"
-            FontFamily="Playfair"
-            TextColor="DarkBlue"
-            BackgroundColor="Bisque"/>
-
+           FontFamily="Playfair"
+           TextColor="#2C3E50"
+           BackgroundColor="Black"/>
         </VerticalStackLayout>
+
     </ScrollView>
 </ContentPage>

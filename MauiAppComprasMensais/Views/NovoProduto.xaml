@@ -11,34 +11,34 @@
 
     <Frame BorderColor="Black" 
            Padding="30"
-           BackgroundColor="Coral">
+           BackgroundColor="Bisque">
 
         <VerticalStackLayout Spacing="15"  Padding="30" 
                              BackgroundColor="LavenderBlush" >
             <Label Text="Descrição do Produto" BackgroundColor="Bisque" FontAttributes="Bold"/>
             <Entry x:Name="txt_descricao" 
                    FontFamily="Playfair"
-                   TextColor="DarkBlue"
+                   TextColor="Black"
                    BackgroundColor="Bisque"/>
 
-        <Label Text="Quantidade: " BackgroundColor="Bisque" FontAttributes="Bold"/>
-        <Entry x:Name="txt_quantidade" Keyboard="Numeric" 
+            <Label Text="Quantidade: " BackgroundColor="Bisque" FontAttributes="Bold"/>
+            <Entry x:Name="txt_quantidade" Keyboard="Numeric" 
                FontFamily="Playfair"
-               TextColor="DarkBlue"
+               TextColor="Black"
                BackgroundColor="Bisque"/>
 
-        <Label Text="Preço Unitário: " BackgroundColor="Bisque" FontAttributes="Bold"/>
-        <Entry x:Name="txt_preco" Keyboard="Numeric"
+            <Label Text="Preço Unitário: " BackgroundColor="Bisque" FontAttributes="Bold"/>
+            <Entry x:Name="txt_preco" Keyboard="Numeric"
                FontFamily="Playfair"
-               TextColor="DarkBlue"
+               TextColor="Black"
                BackgroundColor="Bisque"/>
 
-        <Label Text="Data da Compra:" BackgroundColor="Bisque" FontAttributes="Bold"/>
-        <DatePicker x:Name="datePickerCompra"
+            <Label Text="Data da Compra:" BackgroundColor="Bisque" FontAttributes="Bold"/>
+            <DatePicker x:Name="datePickerCompra"
                     Format="dd/MM/yyyy"
                     MaximumDate="{x:Static sys:DateTime.Now}" 
                     BackgroundColor="Bisque" 
-                    TextColor="DarkBlue"
+                    TextColor="Black"
                     FontAttributes="Bold"
                     FontFamily="Playfair"/>
 
