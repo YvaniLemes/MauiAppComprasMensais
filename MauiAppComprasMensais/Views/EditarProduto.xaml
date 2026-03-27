@@ -39,9 +39,9 @@
 
             <!-- Exibição formatada da data no padrão brasileiro -->
             <Label Text="{Binding DataCadastro, StringFormat='{0:dd/MM/yyyy}'}"
-                   FontAttributes="Italic"
-                   TextColor="Gray"
-                   HorizontalOptions="Center"/>
+            FontAttributes="Italic"
+            TextColor="Gray"
+            HorizontalOptions="Center" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
