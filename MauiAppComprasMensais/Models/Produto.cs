@@ -1,8 +1,9 @@
 ﻿using SQLite;
+using System.ComponentModel;
 
 namespace MauiAppComprasMensais.Models
 {
-    public class Produto
+    public class Produto : INotifyPropertyChanged
     {
         string _descricao;
         double _quantidade;
@@ -15,19 +16,43 @@ namespace MauiAppComprasMensais.Models
         public string Descricao
         {
             get => _descricao;
-            set => _descricao = value;
+            set
+            {
+                if (_descricao != value)
+                {
+                    _descricao = value;
+                    OnPropertyChanged(nameof(Descricao));
+                    OnPropertyChanged(nameof(Total));
+                }
+            }
         }
 
         public double Quantidade
         {
             get => _quantidade;
-            set => _quantidade = value;
+            set
+            {
+                if (_quantidade != value)
+                {
+                    _quantidade = value;
+                    OnPropertyChanged(nameof(Quantidade));
+                    OnPropertyChanged(nameof(Total));
+                }
+            }
         }
 
         public double Preco
         {
             get => _preco;
-            set => _preco = value;
+            set
+            {
+                if (_preco != value)
+                {
+                    _preco = value;
+                    OnPropertyChanged(nameof(Preco));
+                    OnPropertyChanged(nameof(Total));
+                }
+            }
         }
 
         public double Total => Quantidade * Preco;
@@ -35,7 +60,18 @@ namespace MauiAppComprasMensais.Models
         public DateTime DataCadastro
         {
             get => _dataCadastro;
-            set => _dataCadastro = value;
+            set
+            {
+                if (_dataCadastro != value)
+                {
+                    _dataCadastro = value;
+                    OnPropertyChanged(nameof(DataCadastro));
+                }
+            }
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

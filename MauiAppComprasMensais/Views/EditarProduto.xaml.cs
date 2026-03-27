@@ -1,35 +1,45 @@
 using MauiAppComprasMensais.Models;
-using System.Threading.Tasks;
+using System;
 
-namespace MauiAppComprasMensais.Views;
-
-public partial class EditarProduto : ContentPage
+namespace MauiAppComprasMensais.Views
 {
-	public EditarProduto()
-	{
-		InitializeComponent();
-	}
-
-    private async void ToolbarItem_Clicked(object sender, EventArgs e)
+    public partial class EditarProduto : ContentPage
     {
-		try
-		{
-			Produto produto_anexado = BindingContext as Produto;
+        public EditarProduto(Produto produto)
+        {
+            InitializeComponent();
+            BindingContext = produto; // recebe o mesmo objeto da lista
+        }
 
-			Produto p = new Produto
-			{
-                Id = produto_anexado.Id,
-				Descricao = txt_descricao.Text,
-				Quantidade = Convert.ToDouble(txt_quantidade.Text),
-				Preco = Convert.ToDouble(txt_preco.Text),
-			};
-			await App.Db.Update(p);
-			await DisplayAlert("Sucesso!", "Registro Atualizado", "OK");
-			await Navigation.PopAsync();
-		}
-		catch (Exception ex)
-		{
-			await DisplayAlert("Ops!", ex.Message, "OK");
-		}
+        private async void ToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                Produto produto_anexado = BindingContext as Produto;
+
+                if (produto_anexado != null)
+                {
+                    // atualiza as propriedades diretamente
+                    produto_anexado.Descricao = txt_descricao.Text;
+                    produto_anexado.Quantidade = Convert.ToDouble(txt_quantidade.Text);
+                    produto_anexado.Preco = Convert.ToDouble(txt_preco.Text);
+                    produto_anexado.DataCadastro = dt_dataCompra.Date;
+
+                    // salva no banco
+                    await App.Db.Update(produto_anexado);
+
+                    await DisplayAlert("Sucesso!", "Registro Atualizado", "OK");
+                    await Navigation.PopAsync();
+                }
+                else
+                {
+                    await DisplayAlert("Erro", "Produto não encontrado no BindingContext", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Ops!", ex.Message, "OK");
+            }
+        }
     }
 }
