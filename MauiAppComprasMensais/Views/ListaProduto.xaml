@@ -5,6 +5,7 @@
              Title="Compras Mensais"
              BackgroundColor="White">
 
+    <!-- Barra de título -->
     <NavigationPage.TitleView>
         <Grid>
             <Label Text="  Compras Mensais"
@@ -17,78 +18,103 @@
         </Grid>
     </NavigationPage.TitleView>
 
+    <!-- Toolbar -->
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Somar" Clicked="ToolbarItem_Clicked_1" />
         <ToolbarItem Text="Adicionar" Clicked="ToolbarItem_Clicked" />
         <ToolbarItem Text="Relatório" Clicked="ToolbarItem_Clicked_2" />
     </ContentPage.ToolbarItems>
 
+    <!-- Estilos globais -->
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Style TargetType="Label">
+            <!-- Cabeçalho com destaque -->
+            <Style x:Key="HeaderLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="DarkSlateGray" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
                 <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="Padding" Value="5" />
+            </Style>
+
+            <!-- Itens mais sutis -->
+            <Style x:Key="ItemLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="DimGray" />
+                <Setter Property="FontAttributes" Value="None" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="Padding" Value="3" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <StackLayout>
-        <SearchBar x:Name="txt_search" 
-                   Margin="10, 0, 0, 0"
+    <!-- Layout principal -->
+    <Grid RowDefinitions="Auto,*">
+        <!-- Linha 1: Barra de busca -->
+        <SearchBar Grid.Row="0"
+                   x:Name="txt_search"
+                   Margin="10, 0, 10, 0"
                    Placeholder="Busca de Produtos"
                    TextChanged="txt_search_TextChanged" />
 
-        <Frame Padding="0" Margin="10" VerticalOptions="Fill">
-            <ListView x:Name="lst_produtos" 
-                      IsPullToRefreshEnabled="True"
-                      Refreshing="lst_produtos_Refreshing"
-                      ItemSelected="lst_produtos_ItemSelected">
-                <ListView.Header>
-                    <Grid BackgroundColor="LightGray">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="30" />
-                            <ColumnDefinition Width="150" />
-                            <ColumnDefinition Width="100" />
-                            <ColumnDefinition Width="60" />
-                            <ColumnDefinition Width="100" />
-                            <ColumnDefinition Width="100" />
-                        </Grid.ColumnDefinitions>
+        <!-- Linha 2: Lista de produtos -->
+        <ListView Grid.Row="1"
+                  x:Name="lst_produtos"
+                  VerticalOptions="FillAndExpand"
+                  IsPullToRefreshEnabled="True"
+                  Refreshing="lst_produtos_Refreshing"
+                  ItemSelected="lst_produtos_ItemSelected">
 
-                        <Label Grid.Column="0" Text=" ID" FontAttributes="Bold" TextColor="Black" />
-                        <Label Grid.Column="1" Text="Descrição" FontAttributes="Bold" TextColor="Black" />
-                        <Label Grid.Column="2" Text="Preço" FontAttributes="Bold" TextColor="Black" />
-                        <Label Grid.Column="3" Text="Qnt" FontAttributes="Bold" TextColor="Black" />
-                        <Label Grid.Column="4" Text="Total" FontAttributes="Bold" TextColor="Black" />
-                        <Label Grid.Column="5" Text="Data de Compra" FontAttributes="Bold" TextColor="Black" />
-                    </Grid>
-                </ListView.Header>
+            <!-- Cabeçalho -->
+            <ListView.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="140" />
+                    </Grid.ColumnDefinitions>
 
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <ViewCell.ContextActions>
-                                <MenuItem Text="Remover" Clicked="MenuItem_Clicked" />
-                            </ViewCell.ContextActions>
-                            <Grid BackgroundColor="WhiteSmoke">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="30" />
-                                    <ColumnDefinition Width="150" />
-                                    <ColumnDefinition Width="150" />
-                                    <ColumnDefinition Width="100" />
-                                    <ColumnDefinition Width="60" />
-                                    <ColumnDefinition Width="100" />
-                                    <ColumnDefinition Width="100" />
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Text="{ Binding Id}" FontAttributes="Bold" TextColor="Black"/>
-                                <Label Grid.Column="1" Text="{Binding Descricao}" FontAttributes="Bold" TextColor="Black"/>
-                                <Label Grid.Column="2" Text="{Binding Preco, StringFormat='{}{0:c}'}" FontAttributes="Bold" TextColor="Black"/>
-                                <Label Grid.Column="3" Text="{Binding Quantidade}" FontAttributes="Bold" TextColor="Black"/>
-                                <Label Grid.Column="4" Text="{Binding Total, StringFormat='{}{0:c}'}" FontAttributes="Bold" TextColor="Black"/>
-                                <Label Grid.Column="5" Text="{Binding DataCadastro, StringFormat='Comprado em: {0:dd/MM/yyyy}'}" FontAttributes="Bold" TextColor="Black"/>
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </Frame>
-    </StackLayout>
+                    <Label Grid.Column="0" Text="ID" Style="{StaticResource HeaderLabelStyle}" />
+                    <Label Grid.Column="1" Text="Descrição" Style="{StaticResource HeaderLabelStyle}" />
+                    <Label Grid.Column="2" Text="Preço" Style="{StaticResource HeaderLabelStyle}" />
+                    <Label Grid.Column="3" Text="Qnt" Style="{StaticResource HeaderLabelStyle}" />
+                    <Label Grid.Column="4" Text="Total" Style="{StaticResource HeaderLabelStyle}" />
+                    <Label Grid.Column="5" Text="Data de Compra" Style="{StaticResource HeaderLabelStyle}" />
+                </Grid>
+            </ListView.Header>
+
+            <!-- Template dos itens -->
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Remover" Clicked="MenuItem_Clicked" />
+                        </ViewCell.ContextActions>
+                        <Grid BackgroundColor="White">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="140" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0" Text="{Binding Id}" Style="{StaticResource ItemLabelStyle}" />
+                            <Label Grid.Column="1" Text="{Binding Descricao}" Style="{StaticResource ItemLabelStyle}" />
+                            <Label Grid.Column="2" Text="{Binding Preco, StringFormat='{}{0:c}'}" Style="{StaticResource ItemLabelStyle}" />
+                            <Label Grid.Column="3" Text="{Binding Quantidade}" Style="{StaticResource ItemLabelStyle}" />
+                            <Label Grid.Column="4" Text="{Binding Total, StringFormat='{}{0:c}'}" Style="{StaticResource ItemLabelStyle}" />
+                            <Label Grid.Column="5" Text="{Binding DataCadastro, StringFormat='{0:dd/MM/yyyy}'}" Style="{StaticResource ItemLabelStyle}" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
 </ContentPage>

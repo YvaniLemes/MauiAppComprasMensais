@@ -1,4 +1,4 @@
-using MauiAppComprasMensais.Models;
+Ôªøusing MauiAppComprasMensais.Models;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -11,11 +11,11 @@ namespace MauiAppComprasMensais.Views
         {
             InitializeComponent();
 
-            //Define a fonte de dados da ListView como a coleÁ„o lista 
+            //Define a fonte de dados da ListView como a cole√ß√£o lista 
             lst_produtos.ItemsSource = lista;
         }
 
-        //Evento chamado quando a p·gina aparece na tela
+        //Evento chamado quando a p√°gina aparece na tela
         protected async override void OnAppearing()
         {
             try
@@ -26,7 +26,7 @@ namespace MauiAppComprasMensais.Views
                 //Busca todos os produtos do banco de dados
                 List<Produto> tmp = await App.Db.GetAll();
 
-                //Adiciona os produtos ‡ coleÁ„o observ·vel
+                //Adiciona os produtos √† cole√ß√£o observ√°vel
                 tmp.ForEach(i => lista.Add(i));
             }
             catch (Exception ex)
@@ -36,12 +36,12 @@ namespace MauiAppComprasMensais.Views
             }
         }
 
-        //Evento chamado ao clicar no bot„o da toolbar para adicionar o novo produto 
+        //Evento chamado ao clicar no bot√£o da toolbar para adicionar o novo produto 
         private void ToolbarItem_Clicked(object sender, EventArgs e)
         {
             try
             {
-                //Navega para p·gina (NovoProduto) para adicionar o novo produto
+                //Navega para p√°gina (NovoProduto) para adicionar o novo produto
                 Navigation.PushAsync(new Views.NovoProduto());
             }
             catch (Exception ex)
@@ -50,7 +50,7 @@ namespace MauiAppComprasMensais.Views
             }
         }
 
-        //Evento chamado quando o texto da busca È alterado
+        //Evento chamado quando o texto da busca √© alterado
         private async void txt_search_TextChanged(object sender, TextChangedEventArgs e)
         {
             try
@@ -61,10 +61,10 @@ namespace MauiAppComprasMensais.Views
 
                 lista.Clear();
 
-                //Busca produtos que correspondem ‡ pesquisa
+                //Busca produtos que correspondem √† pesquisa
                 List<Produto> tmp = await App.Db.Search(q);
 
-                //Adiciona os resultados ‡ coleÁ„o observ·vel
+                //Adiciona os resultados √† cole√ß√£o observ√°vel
                 tmp.ForEach(i => lista.Add(i));
             }
             catch (Exception ex)
@@ -77,32 +77,32 @@ namespace MauiAppComprasMensais.Views
             }
         }
 
-        //Evento chamado ao clicar no bot„o da toolbar para calcular o total 
+        //Evento chamado ao clicar no bot√£o da toolbar para calcular o total 
         private async void ToolbarItem_Clicked_1(object sender, EventArgs e)
         {
             //soma os valores totais dos produtos
             double soma = lista.Sum(i => i.Total);
 
-            string msg = $"O total È {soma:C}";
+            string msg = $"O total √© {soma:C}";
 
             //Exibe o total em um alerta
             await DisplayAlert("Total dos Produtos", msg, "OK");
         }
 
-        //Evento chamado ao clicar na opÁ„o Delete 
+        //Evento chamado ao clicar na op√ß√£o Delete 
         private async void MenuItem_Clicked(object sender, EventArgs e)
         {
             try
             {
-                //ObtÈm o item do menu que foi clicado
+                //Obt√©m o item do menu que foi clicado
                 MenuItem selecionado = sender as MenuItem;
 
-                //obtÈm o produto associado ao item clicado
+                //obt√©m o produto associado ao item clicado
                 Produto p = selecionado.BindingContext as Produto;
 
-                //confirma se o usu·rio deseja remover o produto
+                //confirma se o usu√°rio deseja remover o produto
                 bool confirm = await DisplayAlert(
-                    "Tem certeza", $"Remover {p.Descricao}?", "Sim", "N„o");
+                    "Tem certeza", $"Remover {p.Descricao}?", "Sim", "N√£o");
 
                 if (confirm)
                 {
@@ -118,23 +118,33 @@ namespace MauiAppComprasMensais.Views
         }
 
         //Evento chamado ao selecionar um item da lista
-        private void lst_produtos_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void lst_produtos_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             try
             {
-                //Obtem o produto selecionado
-                Produto p = e.SelectedItem as Produto;
-
-                //Navega para a p·gina (EditarProduto) de ediÁ„o com o produto selecionado
-                Navigation.PushAsync(new Views.EditarProduto
+                if (e.SelectedItem != null)
                 {
-                    BindingContext = p,
+                    // Obtem o produto selecionado
+                    Produto p = e.SelectedItem as Produto;
 
-                });
+                    // Exemplo: navegar para edi√ß√£o
+                    await Navigation.PushAsync(new Views.EditarProduto
+                    {
+                        BindingContext = p,
+                    });
+
+                    // üîÑ Reload da lista ap√≥s selecionar
+                    lista.Clear();
+                    List<Produto> tmp = await App.Db.GetAll();
+                    tmp.ForEach(i => lista.Add(i));
+
+                    // Limpa a sele√ß√£o para n√£o ficar marcado
+                    ((ListView)sender).SelectedItem = null;
+                }
             }
             catch (Exception ex)
             {
-                DisplayAlert("Ops", ex.Message, "OK");
+                await DisplayAlert("Ops", ex.Message, "OK");
             }
         }
 
@@ -148,7 +158,7 @@ namespace MauiAppComprasMensais.Views
                 //Busca todos os produtos do banco de dados
                 List<Produto> tmp = await App.Db.GetAll();
 
-                //Adiciona os produtos ‡ coleÁ„o observ·vel
+                //Adiciona os produtos √† cole√ß√£o observ√°vel
                 tmp.ForEach(i => lista.Add(i));
             }
             catch (Exception ex)
@@ -162,9 +172,9 @@ namespace MauiAppComprasMensais.Views
             }
         }
 
-        private void ToolbarItem_Clicked_2(object sender, EventArgs e)
+        private async void ToolbarItem_Clicked_2(object sender, EventArgs e)
         {
-
+            await Navigation.PushAsync(new Views.Relatorio());
         }
     }
 }

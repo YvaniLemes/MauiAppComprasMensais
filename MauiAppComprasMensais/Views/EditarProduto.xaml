@@ -11,28 +11,28 @@
     </ContentPage.ToolbarItems>
 
     <ScrollView>
-        <VerticalStackLayout Spacing="15" Padding="30" BackgroundColor="Black">
-            <Frame BorderColor="#B0C4DE" Padding="30" BackgroundColor="Black">
+        <VerticalStackLayout Spacing="15" Padding="30" BackgroundColor="Beige">
+            <Frame BorderColor="#B0C4DE" Padding="30" BackgroundColor="Beige">
                 <Label Text="Editar Produto" FontSize="22" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#2C3E50"/>
             </Frame>
 
-            <Label Text="Descrição do Produto:" BackgroundColor="Black" FontAttributes="Bold" TextColor="#3C3C3C"/>
+            <Label Text="Descrição do Produto:" BackgroundColor="Beige" FontAttributes="Bold" TextColor="#3C3C3C"/>
             <Entry x:Name="txt_descricao" Text="{Binding Descricao}"
            FontFamily="Playfair"
            TextColor="#2C3E50"
-           BackgroundColor="Black"/>
+           BackgroundColor="Beige"/>
 
-            <Label Text="Quantidade:" BackgroundColor="Black" FontAttributes="Bold" TextColor="#3C3C3C"/>
+            <Label Text="Quantidade:" BackgroundColor="Beige" FontAttributes="Bold" TextColor="#3C3C3C"/>
             <Entry x:Name="txt_quantidade" Text="{Binding Quantidade}" Keyboard="Numeric"
            FontFamily="Playfair"
            TextColor="#2C3E50"
-           BackgroundColor="Black"/>
+           BackgroundColor="Beige"/>
 
-            <Label Text="Preço Unitário:" BackgroundColor="Black" FontAttributes="Bold" TextColor="#3C3C3C"/>
+            <Label Text="Preço Unitário:" BackgroundColor="Beige" FontAttributes="Bold" TextColor="#3C3C3C"/>
             <Entry x:Name="txt_preco" Text="{Binding Preco}" Keyboard="Numeric"
            FontFamily="Playfair"
            TextColor="#2C3E50"
-           BackgroundColor="Black"/>
+           BackgroundColor="Beige"/>
         </VerticalStackLayout>
 
     </ScrollView>

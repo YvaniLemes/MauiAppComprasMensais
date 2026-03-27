@@ -9,40 +9,22 @@
         <ToolbarItem Text="Salvar" Clicked="ToolbarItem_Clicked" />
     </ContentPage.ToolbarItems>
 
-    <Frame BorderColor="Black" 
-           Padding="30"
-           BackgroundColor="Bisque">
+    <Frame BorderColor="Black" Padding="30" BackgroundColor="Bisque">
+        <VerticalStackLayout Spacing="15" Padding="30" BackgroundColor="LavenderBlush">
 
-        <VerticalStackLayout Spacing="15"  Padding="30" 
-                             BackgroundColor="LavenderBlush" >
-            <Label Text="Descrição do Produto" BackgroundColor="Bisque" FontAttributes="Bold"/>
-            <Entry x:Name="txt_descricao" 
-                   FontFamily="Playfair"
-                   TextColor="Black"
-                   BackgroundColor="Bisque"/>
+            <Label Text="Descrição do Produto" FontAttributes="Bold"/>
+            <Entry x:Name="txt_descricao" />
 
-            <Label Text="Quantidade: " BackgroundColor="Bisque" FontAttributes="Bold"/>
-            <Entry x:Name="txt_quantidade" Keyboard="Numeric" 
-               FontFamily="Playfair"
-               TextColor="Black"
-               BackgroundColor="Bisque"/>
+            <Label Text="Quantidade:" FontAttributes="Bold"/>
+            <Entry x:Name="txt_quantidade" Keyboard="Numeric" />
 
-            <Label Text="Preço Unitário: " BackgroundColor="Bisque" FontAttributes="Bold"/>
-            <Entry x:Name="txt_preco" Keyboard="Numeric"
-               FontFamily="Playfair"
-               TextColor="Black"
-               BackgroundColor="Bisque"/>
+            <Label Text="Preço Unitário:" FontAttributes="Bold"/>
+            <Entry x:Name="txt_preco" Keyboard="Numeric" />
 
-            <Label Text="Data da Compra:" BackgroundColor="Bisque" FontAttributes="Bold"/>
+            <Label Text="Data da Compra:" FontAttributes="Bold"/>
             <DatePicker x:Name="datePickerCompra"
-                    Format="dd/MM/yyyy"
-                    MaximumDate="{x:Static sys:DateTime.Now}" 
-                    BackgroundColor="Bisque" 
-                    TextColor="Black"
-                    FontAttributes="Bold"
-                    FontFamily="Playfair"/>
-
-
+                        Format="dd/MM/yyyy"
+                        MaximumDate="{x:Static sys:DateTime.Now}" />
         </VerticalStackLayout>
     </Frame>
 </ContentPage>
